@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Templates Polls Detail</title>
+</head>
+<body>
+    <!-- post method is mandatory whenever creating a form that altes data server-side (it's a general basic concept, not only Django's) -->
+    <form action="{% url 'pollsApp:vote' question.id %}" method="post">
+        <!-- used to solve the Cross Site Request Forgeries -->
+        {% csrf_token %} 
+        <fieldset>
+            <legend><h1>{{ question.question_text }}</h1></legend>
+            {% if error_message %}
+                <p><strong>{{ error_message }}</strong></p>
+            {% endif %}
+            {% for choice in question.choice_set.all %} 
+                <!-- radio button for each choice -->
+                <input type="radio" name="choice" id="choice {{ rofloop.counter }}" value="{{choice.id}}">
+                <!-- forloop.counter indicates how many time the for tag has gone thruogh its loop -->
+                <label for="choice {{ forloop.counter }}">
+                    {{ choice.choice_text }}
+                </label>
+                <br>
+            {% endfor %}
+        </fieldset>
+        <input type="submit" value="Vote">
+    </form>
+</body>
+</html>
