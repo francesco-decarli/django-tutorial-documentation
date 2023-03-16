@@ -218,3 +218,15 @@ The created application so far has a bug: if the published date is in the future
  Because of how the **AppDirectoriesFinder** staticfile finder works, it's possible to refer to static files as `polls/style.css`, similar to how you reference the path for templates.
 
  **IMPORTANT NOTE**: we used a path like `static/polls` instead of just getting away by using `static` without subdirectories because of Django will chose the first static file it finds whose name matches. So, if there is a static file with the same name in a *different* application, Django would be unable to distinguish between them. The best way to ensure that Django points at the right one is by *namespacing* them which is done by putting those static files inside another directory named for the application itself.
+
+
+
+ # Admin Site Interface
+ Doing some changes it's possible to custom the way the admin page is displayed.
+
+ # Overridding Django Default Admin Templates
+ Any of Django's default admin templates can be overriden (even `admin/index.html` which is the most important page of the admin):
+
+ - Create an `templates/admin` folder in the app
+ - Copy the template from the default directory in the just created folder (or already existing)
+ - Make any changes needed
